@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import Search from "../search";
-
-const apiKey = "3b4b13259a361de06a9426358092d38c";
+import config from "../../../config";
 
 export default function Weather() {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
   const [weatherData, setWeatherData] = useState(null);
+  const [fahrenheit, setFahrenheit] = useState(true);
+
+  const apiKey = config.API_KEY;
 
   async function fetchWeatherData(city) {
     setLoading(true);
@@ -15,7 +17,6 @@ export default function Weather() {
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`
       );
       const data = await response.json();
-      //   console.log(data);
       if (data) {
         setLoading(false);
         setWeatherData(data);
@@ -43,11 +44,26 @@ export default function Weather() {
     return Math.floor((temp - 273.15) * (9 / 5) + 32);
   }
 
+  function convertToCelsius(temp) {
+    return Math.floor(temp - 273.15);
+  }
+
+  function handleConversionSwitch() {
+    fahrenheit ? setFahrenheit(false) : setFahrenheit(true);
+  }
+
+  function convertTemperature(temp) {
+    if (fahrenheit) {
+      const F = convertToFahrenheit(temp);
+      return <p>{F}&deg; F</p>;
+    }
+    const C = convertToCelsius(temp);
+    return <p>{C}&deg; C</p>;
+  }
+
   useEffect(() => {
     fetchWeatherData("Seattle");
   }, []);
-
-  console.log(weatherData);
 
   return (
     <div>
@@ -69,11 +85,12 @@ export default function Weather() {
             <span>{getCurrentDate()}</span>
           </div>
           <div className="temp">
-            {weatherData?.main ? (
-              <p>{convertToFahrenheit(weatherData.main.temp)}&deg; F</p>
-            ) : (
-              ""
-            )}
+            {weatherData?.main?.temp
+              ? convertTemperature(weatherData.main.temp)
+              : ""}
+            <button onClick={handleConversionSwitch}>
+              convert to {fahrenheit ? "Celsius" : "Fahrenheit"}
+            </button>
           </div>
           <p className="description">
             {weatherData && weatherData.weather && weatherData.weather[0]
