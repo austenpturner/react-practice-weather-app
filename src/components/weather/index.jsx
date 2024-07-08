@@ -39,6 +39,10 @@ export default function Weather() {
     });
   }
 
+  function convertToFahrenheit(temp) {
+    return Math.floor((temp - 273.15) * (9 / 5) + 32);
+  }
+
   useEffect(() => {
     fetchWeatherData("Seattle");
   }, []);
@@ -64,7 +68,13 @@ export default function Weather() {
           <div className="date">
             <span>{getCurrentDate()}</span>
           </div>
-          <div className="temp">{weatherData?.main?.temp}</div>
+          <div className="temp">
+            {weatherData?.main ? (
+              <p>{convertToFahrenheit(weatherData.main.temp)}&deg; F</p>
+            ) : (
+              ""
+            )}
+          </div>
           <p className="description">
             {weatherData && weatherData.weather && weatherData.weather[0]
               ? weatherData.weather[0].description
