@@ -1,42 +1,95 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  background-color: rgb(0, 255, 166);
+  border-radius: 20px;
+  height: 470px;
+  margin: 50px auto 0;
+  padding: 20px 15px;
+  text-align: center;
+  width: 90%;
+  max-width: 700px;
+}
+
+.search-engine {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 10px auto 30px;
+  width: 100%;
+}
+
+.search-engine input {
+  background-color: #fff;
+  border: 1px solid;
+  border-radius: 8px;
+  color: #555;
+  font-size: 16px;
+  height: 45px;
+  padding: 2px 15px;
+  outline: none;
+  width: 70%;
+}
+
+.search-engine button {
+  background-color: #000;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 20px;
+  outline: none;
+  padding: 13px 15px;
+}
+
+.weather-data {
+  color: #242424;
+}
+
+.loading {
+  color: #000;
+  font-size: 60px;
+  font-weight: bolder;
+}
+
+.city-name {
+  margin-bottom: 10px;
+}
+
+.date {
+  font-size: 18px;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.temp {
+  font-size: 64px;
+  font-weight: 500;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.description {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0 auto 20px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.weather-info {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 20px;
+  padding: 0px 20px;
+  text-align: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+.column {
+  display: flex;
+  align-items: center;
+  line-height: 1px;
 }
